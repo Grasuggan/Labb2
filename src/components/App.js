@@ -7,7 +7,7 @@ import Submitters from './Submitters'
 export const ConfigContext = React.createContext();
 
 const configValue = {
-    shootme: true
+    testing: true
 };
 
 

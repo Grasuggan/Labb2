@@ -180,8 +180,8 @@ function ContactForm() {
       {/* <SubmitCounts submitters={submittedArray} /> */}
 
 
-      { context.shootme === false ? null : (
-          <div> <h1>Okay to shoot me</h1> </div>
+      { context.testing === false ? null : (
+          <div> <h1>Testing context</h1> </div>
       )}
     </div>
   );
