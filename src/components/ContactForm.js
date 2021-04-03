@@ -4,17 +4,12 @@ import SubmitCounts from "./SubmitCounts.js";
 import "../css/App.css";
 import SubmitButton from "./SubmitButton.js";
 import {ButtonContext, btnInfo} from './button-context.js'
-import Submitted from './Submitted'
-import { ConfigContext } from "./App"
+import JustSubmitted from './JustSubmitted'
+
 import * as submittersApi from '../api/submittersApi';
-
-
-
 
 function ContactForm() {
 
-  
-  const context = useContext(ConfigContext);
 
   const initialState = {
     id: null,
@@ -25,8 +20,8 @@ function ContactForm() {
 
   const [inputName, setInputName] = useState(initialState);
   const [count, setCount] = useState(0);
-    const [btnState, setBtnState] = useState(btnInfo.disabled);
-    const [errors, setErrors] = useState({});
+  const [btnState, setBtnState] = useState(btnInfo.disabled);
+  const [errors, setErrors] = useState({});
   const inputRef = useRef();
 
 
@@ -42,16 +37,11 @@ function ContactForm() {
           }
           //add new actiontype to store submitters into json file
           case "addToJson": {
-            //   return state;
-            
               return addtojsonfunc(action.data)
-
           }
           default:
               return state;
       }
-
-     
   }
   
   //   const [submittedArray, setSubmittedArray] = useState([]);
@@ -63,7 +53,7 @@ function ContactForm() {
     event.preventDefault();
 
     const newData = {
-        id: submittedArray.length + 1,
+      id: submittedArray.length + 1,
       firstName: event.target.firstName.value,
       lastName: event.target.lastName.value,
       desc: inputRef.current.value,
@@ -82,10 +72,10 @@ function ContactForm() {
             data: newArray
         });
 
-        dispatch({
-            type: "addToJson",
-            data: newData
-        });
+        // dispatch({
+        //     type: "addToJson",
+        //     data: newData
+        // });
 
     
     }
@@ -112,19 +102,16 @@ function ContactForm() {
 
     if(inputName.firstName === "" || inputName.lastName === "" ){
         setBtnState(btnState => btnState = btnInfo.disabled);
-        // subButton = <button type="submit" style={{backgroundColor: disabled.color}}>{disabled.text}</button>
-        
     }
     else{
         
         setBtnState(btnState => btnState = btnInfo.enabled);
-        //  subButton = <button type="submit" style={{backgroundColor: enabled.color}}>{enabled.text}</button>
+    
       }
 
-      // console.log(`Context color ${btnState.color}`)
-      
-   
+     
   }
+
 
   useEffect(() => {
     function cleanForm() {
@@ -142,8 +129,12 @@ function ContactForm() {
     };
   }, [count]);
 
+
+  const checkboxRef = useRef();
+
+
   return (
-    <div>
+    <>
       <Greeting first={inputName.firstName} last={inputName.lastName} />
       <form onSubmit={handleSubmit} id="app-form" key={count}>
         <label htmlFor="firstName">
@@ -168,22 +159,36 @@ function ContactForm() {
           Describe yourself (optional):
           <textarea ref={inputRef}></textarea>
         </label>
+        <label>Form submitted {count} times</label>
+        
         {/* <SubmitButton inputState={inputName} /> */}
        
       <ButtonContext.Provider value={btnState}>
-            {/* <button type="submit" style={{backgroundColor: btnInfo.color}}>{btnInfo.text}</button> */}
             <SubmitButton />
         </ButtonContext.Provider>
       </form>
+      <JustSubmitted subs={submittedArray} />
+      {/* <label htmlFor="checkbox">
+          Show all submitters?
+          <input
+            type="checkbox"
+            name="checkbox"
+            id="checkbox"
+            ref={checkboxRef}
+            autoComplete="false"
+          />
+        </label>
      <label>Form submitted {count} times</label>
-        {/* <Submitted subs={submittedArray} /> */}
+     <ConfigContext.Provider value={configValue}>
+        <JustSubmitted subs={submittedArray} />
+      </ConfigContext.Provider> */}
       {/* <SubmitCounts submitters={submittedArray} /> */}
 
 
-      { context.testing === false ? null : (
+      {/* { context.testing === false ? null : (
           <div> <h1>Testing context</h1> </div>
-      )}
-    </div>
+      )} */}
+    </>
   );
 }
 

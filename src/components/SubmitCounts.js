@@ -1,79 +1,81 @@
-import React, { useEffect } from 'react'
-import Submitted from './Submitted.js'
+import React, { useState, useRef, useEffect, useContext, useReducer } from 'react'
+import SearchResult from './SearchResult'
 // import { getCourses } from "../api/courseApi"
 // import { render } from '@testing-library/react';
 
 function SubmitCounts(props){
 
+    const [listToShow, setListToShow] = useState([]);
+    const [initialSubmitters, seInitialSubmitters] = useState([props.submitters])
+    const [showFromList, setShowFromList] = useState(false)
 
-     let submitters = null;
+     function handleSearchWhileType(event){
+        const result = event.target.value;
+      } //Maybe thos one later
+  
+      useEffect(() => {
+        if (listToShow.length > 0){
+            setShowFromList(true);
+           
+        }
+        else{
+            setShowFromList(false);
+        }
 
-    //  useEffect(() => {
-    //     getCourses().then(function(courses){
-    //         //Setstate
-    //     })
-       //     courseApi.saveCourses(course)
-    // })
+     }, [listToShow]);
 
-    // renderSearch() {
-    //     course => {
-    //         return (
-    //             <tr>
-    //                 <td key={course.something}>{course.title}</td>
-    //             </tr>
-    //         );
-    //     }
-    // }
+     useEffect(() => {
+        seInitialSubmitters(props.submitters);
+     });
+    
+    function handleSearch(event){
+        event.preventDefault();
+        const searchString = event.target.searchInput.value;
 
-    // return (
-    //     {state.courses.map(renderRow)}
-    // )
+        if(event.target.searchInput.value !== ""){
+        const emptyArray = [];
 
-
-    // CoursePage.propTypes = {
-    //     author: Proptypes.number.isRequired,
-    //     firstName: Proptypes.array.isRequired,
-            // anArray: Proptypes.arrayOf(Proptypes.shape({
-            //     id: Proptypes.number.isRequired,
-            //     title: Proptypes.string.isRequired
-            // })).isRequired,
-    //     desc: Proptypes.object,
-    //     something: Proptypes.func.isRequired
-    // }
-    // //Will return error at runtime if something is wrong
-
-    // CoursePage.defaultProps = {
-    //     errors: {}
-    // }
-    ////Sets the erros to an empty object if this props isnt passed in
-
-
-
-
-     //Make a select drop down of submitters to change info about each one and save to new list, maybe with custom hook outside Contact form? https://reactjs.org/docs/hooks-custom.html
-     //https://github.com/pkellner/pluralsight-course-using-react-hooks
-
-     
-     //Create new component with all submitters
-     //Make a search function that searches through all submitters in new component axios
-    if(props.submitters.length){
-        submitters = props.submitters.map(submitter => (
-            <div className="profile" key={submitter.id}>
-            <div className="info">
-              <div>{submitter.firstName } {submitter.lastName}</div>
-              <div className="description"><span>Description:</span> {submitter.desc}</div>
-           </div>
-       </div>
-        ))
+        
+        for(let i = 0; i < initialSubmitters.length; i++ ){
+            if(initialSubmitters[i].firstName.includes(searchString) || initialSubmitters[i].lastName.includes(searchString) || initialSubmitters[i].desc.includes(searchString)){
+                 const newArray = emptyArray.slice();
+                newArray.push(initialSubmitters[i]);
+                emptyArray.push(...newArray);
+            }
+        }
+        emptyArray.map(list => (
+            console.log(`We have a list with name ${list.firstName}`)
+        ));
+        setListToShow(emptyArray);
+        
+    
+        }
+        else{
+            setListToShow([]);
+        }
+       
     }
 
-
- 
-
+    
     return(
         <>
-            <div>Here comes a lot of submitters</div>
-            {submitters}
+           <form onSubmit={handleSearch} id="search-form">
+            <input type="text" name="searchInput"
+            id="searchInput" placeholder="Search for submitter" onChange={handleSearchWhileType}/>
+            </form>
+            {
+                showFromList ?  listToShow.map(list => (
+                    <div className="profile" key={list.id} id={list.id}>
+                <SearchResult result={list} /> 
+                </div>
+                )) : 
+                initialSubmitters.map(mitter =>(
+                     <div className="profile" key={mitter.id} id={mitter.id}>
+                    <SearchResult result={mitter} /> 
+                    </div> 
+                 )) 
+                    
+            }
 
           
         </>

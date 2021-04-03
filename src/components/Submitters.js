@@ -4,28 +4,18 @@ import SubmitCounts from './SubmitCounts.js'
 
 
 function Submitters(){
-
-    // function something()  {
-    //     axios.get(`https://jsonplaceholder.typicode.com/users`)
-    //     .then(res => {
-    //       const persons = res.data;
-    //       this.setState({ persons });
-    //     })
-    // }
-
-
-   const [submitters, setSubmitters] = useState([]);
-
-   useEffect(() => {
     
-    getSubmitters().then(_submitters => setSubmitters(_submitters));
-
-  }, []);
-
+    const [allsubs, setAllSubs] = useState([]);
+ 
+    useEffect(() => {
+        getSubmitters().then(_submitters =>  setAllSubs(_submitters));
+       
+     }, []);
+  
     return (
         <div>
             <h1>Welcome to the other site!</h1>
-            <SubmitCounts submitters={submitters} />
+              <SubmitCounts submitters={allsubs} />
         </div>
     )
 }

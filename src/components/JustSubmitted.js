@@ -1,9 +1,11 @@
-import React from 'react'
-// import tomatoAv from './tomatoAv.jpg'
+import React, { useContext}  from 'react'
+import { ConfigContext } from "./Checkbox.js"
 
-function Submitted(props) {
+
+function JustSubmitted(props) {
 
     //Move this to Contact form js!
+    const context = useContext(ConfigContext);
 
     let submitter = null;
     let allsubmitters = null;
@@ -14,7 +16,7 @@ function Submitted(props) {
 
         props.subs.map((sub, i) => {
             if(subLen === (i + 1)){
-              submitter = <div className="profile"> <h3>Last one to submit</h3>
+              submitter = <div className="profile" key={sub.id}> <h3>Last one to submit</h3>
                   <div className="info">
                     <div>{sub.firstName } {sub.lastName} <span>submitted {time}</span>.</div>
                     <div className="description"><span>Description:</span> {sub.desc}</div>
@@ -25,21 +27,27 @@ function Submitted(props) {
         })
 
         allsubmitters = props.subs.map(sub=> (
-         <div className="profile"> 
+         <div className="profile" key={sub.id}> 
             <div className="info">
-              <div>{sub.firstName } {sub.lastName} <span>submitted {time}</span>.</div>
+              <div> {sub.firstName } {sub.lastName} <span>submitted {time}</span>.</div>
               <div className="description"><span>Description:</span> {sub.desc}</div>
            </div>
        </div>
         ))
     }
 
-     return(
+     return( 
          <>
-           {submitter}
-           {allsubmitters}
+             { context.showAll == true ? 
+             <div>
+             {submitter}
+            {allsubmitters} </div>  : <div> {submitter} </div>
+
+               
+            } 
+          
         </>
      )
  }
  
- export default Submitted
+ export default JustSubmitted

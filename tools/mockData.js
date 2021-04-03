@@ -14,7 +14,7 @@ const submitters = [
   {
     id: 3,
     firstName: "Auth0",
-    lastName: 1,
+    lastName: "HEjhej",
     desc: "Lordbengson"
   }
 ];
