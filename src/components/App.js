@@ -15,8 +15,8 @@ function App() {
             <Navigation />
             
             <Switch> 
-                <Route exact path="/" component={Checkbox} />
-                <Route path="/submitters" component={Submitters} />
+                <Route exact path="/" component={Checkbox} key={1}/>
+                <Route path="/submitters" component={Submitters} key={2}/>
             </Switch>
             </div>  
 

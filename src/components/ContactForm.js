@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useContext, useReducer } from "react";
+import React, { useState, useRef, useEffect, useCallback, useReducer } from "react";
 import Greeting from "./Greeting.js";
 import SubmitCounts from "./SubmitCounts.js";
 import "../css/App.css";
@@ -16,6 +16,7 @@ function ContactForm() {
     firstName: "",
     lastName: "",
     desc: "",
+    time: "" 
   };
 
   const [inputName, setInputName] = useState(initialState);
@@ -26,7 +27,7 @@ function ContactForm() {
 
 
   function addtojsonfunc(data){
-    console.log(`jsonfunc ${data.firstName} id ${data.id} `)
+    // console.log(`jsonfunc ${data.firstName} id ${data.id} `)
     submittersApi.saveSubmitters(data);
   };
   
@@ -51,19 +52,20 @@ function ContactForm() {
 
   function handleSubmit(event) {
     event.preventDefault();
-
+    var today = new Date();
+    var subTime = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const newData = {
       id: submittedArray.length + 1,
       firstName: event.target.firstName.value,
       lastName: event.target.lastName.value,
       desc: inputRef.current.value,
+      time: subTime
     };
 
     if(!formIsValid(newData)) {
       alert("oops you forgot something");
     } else {
       setCount((C) => C + 1);
-      console.log(`Submitted ${count} times.`);
       const newArray = submittedArray.slice();
       newArray.push(newData);
     //   setSubmittedArray(newArray);
@@ -76,10 +78,8 @@ function ContactForm() {
         //     type: "addToJson",
         //     data: newData
         // });
-
-    
     }
-  }
+  };
 
   function formIsValid(newData) {
     const _errors = {};
@@ -92,14 +92,15 @@ function ContactForm() {
     return Object.keys(_errors).length === 0;
   }
 
-  function handleGreeting(event) {
-    const result = event.target.value;
-    setInputName({
-      ...inputName,
-      [event.target.name]: result,
-    });
- 
+  const handleGreeting = useCallback((event) => {
+  
+      const result = event.target.value;
+      setInputName({
+        ...inputName,
+        [event.target.name]: result,
+      });
 
+   
     if(inputName.firstName === "" || inputName.lastName === "" ){
         setBtnState(btnState => btnState = btnInfo.disabled);
     }
@@ -108,9 +109,7 @@ function ContactForm() {
         setBtnState(btnState => btnState = btnInfo.enabled);
     
       }
-
-     
-  }
+  });
 
 
   useEffect(() => {
@@ -128,9 +127,6 @@ function ContactForm() {
       cleanForm();
     };
   }, [count]);
-
-
-  const checkboxRef = useRef();
 
 
   return (
@@ -168,26 +164,6 @@ function ContactForm() {
         </ButtonContext.Provider>
       </form>
       <JustSubmitted subs={submittedArray} />
-      {/* <label htmlFor="checkbox">
-          Show all submitters?
-          <input
-            type="checkbox"
-            name="checkbox"
-            id="checkbox"
-            ref={checkboxRef}
-            autoComplete="false"
-          />
-        </label>
-     <label>Form submitted {count} times</label>
-     <ConfigContext.Provider value={configValue}>
-        <JustSubmitted subs={submittedArray} />
-      </ConfigContext.Provider> */}
-      {/* <SubmitCounts submitters={submittedArray} /> */}
-
-
-      {/* { context.testing === false ? null : (
-          <div> <h1>Testing context</h1> </div>
-      )} */}
     </>
   );
 }

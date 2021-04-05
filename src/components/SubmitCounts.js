@@ -11,22 +11,20 @@ function SubmitCounts(props){
 
      function handleSearchWhileType(event){
         const result = event.target.value;
-      } //Maybe thos one later
+      } //Maybe thois one later
   
       useEffect(() => {
         if (listToShow.length > 0){
-            setShowFromList(true);
-           
+            setShowFromList(true);          
         }
         else{
             setShowFromList(false);
         }
-
      }, [listToShow]);
 
      useEffect(() => {
         seInitialSubmitters(props.submitters);
-     });
+     }, [props.submitters]);
     
     function handleSearch(event){
         event.preventDefault();
@@ -58,7 +56,7 @@ function SubmitCounts(props){
 
     
     return(
-        <>
+        <React.Fragment>
            <form onSubmit={handleSearch} id="search-form">
             <input type="text" name="searchInput"
             id="searchInput" placeholder="Search for submitter" onChange={handleSearchWhileType}/>
@@ -66,7 +64,7 @@ function SubmitCounts(props){
             {
                 showFromList ?  listToShow.map(list => (
                     <div className="profile" key={list.id} id={list.id}>
-                <SearchResult result={list} /> 
+                <SearchResult result={list}/> 
                 </div>
                 )) : 
                 initialSubmitters.map(mitter =>(
@@ -78,7 +76,7 @@ function SubmitCounts(props){
             }
 
           
-        </>
+        </React.Fragment>
     )
 }
 

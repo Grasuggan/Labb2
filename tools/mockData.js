@@ -3,19 +3,22 @@ const submitters = [
     id: 1,
     firstName: "Securing React Apps with Auth0",
     lastName: "bengson",
-    desc: "JavaScript"
+    desc: "JavaScript",
+    time: "13:29:33"
   },
   {
     id: 2,
     firstName: "Korv",
     lastName: "bengsonSON",
-    desc: "JavaScript"
+    desc: "JavaScript",
+    time: "14:29:33"
   },
   {
     id: 3,
     firstName: "Auth0",
     lastName: "HEjhej",
-    desc: "Lordbengson"
+    desc: "Lordbengson",
+    time: "15:29:33"
   }
 ];
 

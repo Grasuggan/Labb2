@@ -29,7 +29,7 @@ export function saveSubmitters(submitter) {
   //     id: parseInt(submitter.Id, 10)
   //   })
   // })
-  console.log(`${submitter.firstName}`)
+  // console.log(`${submitter.firstName}`)
   return fetch(baseUrl + (submitter.id || ""), {
     method: "POST", // POST for create, PUT to update when id already exists.
     headers: { "content-type": "application/json" },

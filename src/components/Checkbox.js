@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useContext, useReducer } from "react";
+import React, { useState, useRef, useEffect} from "react";
 import ContactForm from './ContactForm.js'
 
 export const ConfigContext = React.createContext();
@@ -11,12 +11,24 @@ const configValue = {
 
 function Checkbox(){
 
+    const [checked, setChecked] = useState(true)
+    const checkboxRef = useRef();
+    
+    useEffect(() => {       
+       if(checked){
+        configValue.showAll = false;
+       }
+       else{
+        configValue.showAll = true
+       }
+     }, [checked]);
+
     function handleCheckBox(event){
         if(event.target.checked){
-          configValue.showAll = true
+            setChecked(true);
         }
         else{
-          configValue.showAll = false
+            setChecked(false);
         }
           
       }
@@ -25,7 +37,6 @@ function Checkbox(){
         <>
     <ConfigContext.Provider value={configValue}>
         <ContactForm />
-
         <form>
         <label htmlFor="checkbox">
           Show all submitters?
@@ -33,7 +44,8 @@ function Checkbox(){
             type="checkbox"
             name="checkbox"
             id="checkbox"
-            onChange={handleCheckBox}
+            onClick={handleCheckBox}
+            ref={checkboxRef}
           />
         </label>
         </form>
