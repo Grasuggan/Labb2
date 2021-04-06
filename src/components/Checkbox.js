@@ -14,14 +14,16 @@ function Checkbox(){
     const [checked, setChecked] = useState(true)
     const checkboxRef = useRef();
     
-    useEffect(() => {       
-       if(checked){
-        configValue.showAll = false;
-       }
-       else{
-        configValue.showAll = true
-       }
-     }, [checked]);
+      useEffect(() => {       
+        if(checked){
+         configValue.showAll = false;
+        }
+        else{
+         configValue.showAll = true
+        }
+      }, [checked]);
+    
+  
 
     function handleCheckBox(event){
         if(event.target.checked){

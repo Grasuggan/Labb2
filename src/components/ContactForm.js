@@ -26,10 +26,8 @@ function ContactForm() {
   const inputRef = useRef();
 
 
-  function addtojsonfunc(data){
-    // console.log(`jsonfunc ${data.firstName} id ${data.id} `)
-    submittersApi.saveSubmitters(data);
-  };
+
+
   
   function submittersReducer(state, action) {
       switch (action.type) {
@@ -38,7 +36,8 @@ function ContactForm() {
           }
           //add new actiontype to store submitters into json file
           case "addToJson": {
-              return addtojsonfunc(action.data)
+              // return addtojsonfunc(action.data)
+              return submittersApi.saveSubmitters(action.data);
           }
           default:
               return state;
@@ -48,14 +47,18 @@ function ContactForm() {
   //   const [submittedArray, setSubmittedArray] = useState([]);
   const [submittedArray, dispatch] = useReducer(submittersReducer, []);
 
-
+  // function addtojsonfunc(data){
+  //   // console.log(`jsonfunc ${data.firstName} id ${data.id} `)
+  //   submittersApi.saveSubmitters(data);
+   
+  // };
 
   function handleSubmit(event) {
     event.preventDefault();
     var today = new Date();
     var subTime = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const newData = {
-      id: submittedArray.length + 1,
+      id: submittedArray.length + 8,
       firstName: event.target.firstName.value,
       lastName: event.target.lastName.value,
       desc: inputRef.current.value,
@@ -69,15 +72,18 @@ function ContactForm() {
       const newArray = submittedArray.slice();
       newArray.push(newData);
     //   setSubmittedArray(newArray);
-        dispatch({
-            type: "setSubmittedArray",
-            data: newArray
-        });
 
-        // dispatch({
-        //     type: "addToJson",
-        //     data: newData
-        // });
+      dispatch({
+        type: "addToJson",
+        data: newData
+      });
+      dispatch({
+        type: "setSubmittedArray",
+        data: newArray
+    });
+       
+
+       
     }
   };
 
@@ -102,11 +108,11 @@ function ContactForm() {
 
    
     if(inputName.firstName === "" || inputName.lastName === "" ){
-        setBtnState(btnState => btnState = btnInfo.disabled);
+        setBtnState((btnState) => btnState = btnInfo.disabled);
     }
     else{
         
-        setBtnState(btnState => btnState = btnInfo.enabled);
+        setBtnState((btnState) => btnState = btnInfo.enabled);
     
       }
   });
@@ -117,7 +123,7 @@ function ContactForm() {
       setInputName(initialState);
       setBtnState(btnInfo.disabled);
     }
-    if (count != 0) {
+    if (count !== 0) {
       setTimeout(() => {
         alert(`Thank you for entering the form!`);
       }, 1000);

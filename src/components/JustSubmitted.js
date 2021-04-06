@@ -62,7 +62,7 @@ function submittersList(subsList){
 
      return( 
          <>
-             { context.showAll == true ? 
+             { context.showAll === true ? 
              <div>
                 
              {submitter}

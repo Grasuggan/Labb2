@@ -1,8 +1,8 @@
 import { handleResponse, handleError } from "./apiUtils";
-const baseUrl = process.env.REACT_APP_API_URL + "/submitters/";
+const baseUrl = process.env.REACT_APP_API_URL + "/submitters";
 
 export function getSubmitters() {
-  return fetch(baseUrl)
+  return fetch(baseUrl + "/")
     .then(handleResponse)
     .catch(handleError);
 }
@@ -29,8 +29,10 @@ export function saveSubmitters(submitter) {
   //     id: parseInt(submitter.Id, 10)
   //   })
   // })
+  // .then(handleResponse)
+  // .catch(handleError);
   // console.log(`${submitter.firstName}`)
-  return fetch(baseUrl + (submitter.id || ""), {
+  return fetch(baseUrl, {
     method: "POST", // POST for create, PUT to update when id already exists.
     headers: { "content-type": "application/json" },
     body: JSON.stringify(submitter)

@@ -8,7 +8,7 @@ const submitters = [
   },
   {
     id: 2,
-    firstName: "Korv",
+    firstName: "Anna",
     lastName: "bengsonSON",
     desc: "JavaScript",
     time: "14:29:33"
@@ -28,7 +28,8 @@ const newSubmitter = {
   id: null,
   firstName: "",
   lastName: "",
-  desc: ""
+  desc: "",
+  time: ""
 };
 
 // Using CommonJS style export so we can consume via Node (without using Babel-node)
