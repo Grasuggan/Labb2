@@ -62,11 +62,11 @@ function submittersList(subsList){
 
      return( 
          <>
+             {submitter} 
+             
              { context.showAll === true ? 
              <div>
-                
-             {submitter}
-            {allsubmitters} </div>  : <div> {submitter} </div>
+            {allsubmitters} </div>  : <div> </div>
 
                
             } 

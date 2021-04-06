@@ -58,7 +58,7 @@ function ContactForm() {
     var today = new Date();
     var subTime = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const newData = {
-      id: submittedArray.length + 8,
+      // id: submittedArray.length + 8,
       firstName: event.target.firstName.value,
       lastName: event.target.lastName.value,
       desc: inputRef.current.value,

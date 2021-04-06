@@ -4,7 +4,7 @@ import ContactForm from './ContactForm.js'
 export const ConfigContext = React.createContext();
 
 const configValue = {
-    testing: true
+  showAll: false
 };
 
 
@@ -15,12 +15,7 @@ function Checkbox(){
     const checkboxRef = useRef();
     
       useEffect(() => {       
-        if(checked){
-         configValue.showAll = false;
-        }
-        else{
-         configValue.showAll = true
-        }
+        return () => {configValue.showAll = checked;}
       }, [checked]);
     
   
@@ -38,7 +33,6 @@ function Checkbox(){
     return (
         <>
     <ConfigContext.Provider value={configValue}>
-        <ContactForm />
         <form>
         <label htmlFor="checkbox">
           Show all submitters?
@@ -51,6 +45,7 @@ function Checkbox(){
           />
         </label>
         </form>
+        <ContactForm />
         </ConfigContext.Provider>
         </>
   
