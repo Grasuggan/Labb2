@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect} from "react";
 import ContactForm from './ContactForm.js'
+import {Checkboxstyled} from '../css/Styles.js'
 
 export const ConfigContext = React.createContext();
 
@@ -34,7 +35,7 @@ function Checkbox(){
         <>
     <ConfigContext.Provider value={configValue}>
         <form>
-        <label htmlFor="checkbox">
+        <Checkboxstyled htmlFor="checkbox">
           Show all submitters?
           <input
             type="checkbox"
@@ -43,7 +44,7 @@ function Checkbox(){
             onClick={handleCheckBox}
             ref={checkboxRef}
           />
-        </label>
+        </Checkboxstyled>
         </form>
         <ContactForm />
         </ConfigContext.Provider>

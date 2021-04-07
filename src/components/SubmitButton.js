@@ -3,11 +3,9 @@ import React, {Component} from 'react'
 import {ButtonContext} from './button-context.js'
 
 
-// const btnInfo = useContext(ButtonGlobalProvider);
+
 class SubmitButton extends React.Component{
-    constructor(props) {
-        super(props);
-    };
+ 
   
 
     static contextType = ButtonContext;

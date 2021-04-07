@@ -1,14 +1,16 @@
-import React, { useEffect } from 'react'
-
+import React from 'react'
+import {Info} from '../css/Styles.js'
 
 
 function SearchResult(props){
 
 return(
-    <div className="info">
+   
+    <Info>
     <div>{props.result.firstName } {props.result.lastName}</div>
     <div className="description"><span>Description:</span> {props.result.desc}</div>
-    </div>
+    </Info>
+
 )
 }
 

@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect, useContext, useReducer } from 'react'
+import React, { useState, useEffect} from 'react'
 import SearchResult from './SearchResult'
-// import { getCourses } from "../api/courseApi"
-// import { render } from '@testing-library/react';
+import {SubmitterFrame} from '../css/Styles.js'
+import {Input} from '../css/Styles.js'
 
 function SubmitCounts(props){
 
@@ -9,9 +9,9 @@ function SubmitCounts(props){
     const [initialSubmitters, seInitialSubmitters] = useState([props.submitters])
     const [showFromList, setShowFromList] = useState(false)
 
-     function handleSearchWhileType(event){
-        const result = event.target.value;
-      } //Maybe thois one later
+    //  function handleSearchWhileType(event){
+    //     const result = event.target.value;
+    //   } //Maybe thois one later
   
       useEffect(() => {
         if (listToShow.length > 0){
@@ -58,19 +58,23 @@ function SubmitCounts(props){
     return(
         <React.Fragment>
            <form onSubmit={handleSearch} id="search-form">
-            <input type="text" name="searchInput"
-            id="searchInput" placeholder="Search for submitter" onChange={handleSearchWhileType}/>
+            <Input type="text" name="searchInput"
+            id="searchInput" placeholder="Search for submitter"/>
             </form>
             {
                 showFromList ?  listToShow.map(list => (
                     <div className="profile" key={list.id} id={list.id}>
+                        <SubmitterFrame>
                 <SearchResult result={list}/> 
+                </SubmitterFrame>
                 </div>
                 )) : 
                 initialSubmitters.map(mitter =>(
+                    <SubmitterFrame>
                      <div className="profile" key={mitter.id} id={mitter.id}>
                     <SearchResult result={mitter} /> 
                     </div> 
+                    </SubmitterFrame>
                  )) 
                     
             }

@@ -1,10 +1,13 @@
 import React, { useContext, useMemo}  from 'react'
 import { ConfigContext } from "./Checkbox.js"
+import styled, { css } from 'styled-components'
+import {FirstSubmitterFrame, Info, SubmitterFrame} from '../css/Styles.js'
+
+
 
 
 function JustSubmitted(props) {
-
-    
+ 
     const context = useContext(ConfigContext);
 
 
@@ -31,13 +34,14 @@ function JustSubmitted(props) {
             if(subLen === (i + 1)){
             
               result = <div className="profile" key={sub.id}> <h3>Last one to submit</h3>
-                  <div className="info">
+                  {/* <div className="info"> */}
+                      <Info>
                     <div>{sub.firstName } {sub.lastName} 
-                    <span>submitted {sub.time}</span>
+                    <span> submitted {sub.time}</span>
                     .</div>
                     <div className="description"><span>Description:</span> {sub.desc}</div>
-                 </div>
-                 <p>-------------------------------------------------</p>
+                    </Info>
+            
              </div>
             }
         })
@@ -49,12 +53,12 @@ function submittersList(subsList){
 
         return subsList.map(sub=> (
          <div className="profile" key={sub.id}> 
-            <div className="info">
+            <Info>
               <div> {sub.firstName } {sub.lastName} 
-              <span>submitted {sub.time}</span>
+              <span> submitted {sub.time}</span>
               .</div>
-              <div className="description"><span>Description:</span> {sub.desc}</div>
-           </div>
+              <div className="description"><span>Description: </span> {sub.desc}</div>
+              </Info>
        </div>
         ))
     
@@ -62,11 +66,14 @@ function submittersList(subsList){
 
      return( 
          <>
+        {submitter != null ? <FirstSubmitterFrame>
              {submitter} 
+           </ FirstSubmitterFrame> : <div></div> } 
              
-             { context.showAll === true ? 
-             <div>
-            {allsubmitters} </div>  : <div> </div>
+             { context.showAll === true && submitter != null ? 
+              <SubmitterFrame>
+                  <h3>All submitters</h3>
+            {allsubmitters} </SubmitterFrame>  : <div ></div>
 
                
             } 

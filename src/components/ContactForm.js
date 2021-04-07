@@ -1,11 +1,10 @@
 import React, { useState, useRef, useEffect, useCallback, useReducer } from "react";
 import Greeting from "./Greeting.js";
-import SubmitCounts from "./SubmitCounts.js";
 import "../css/App.css";
 import SubmitButton from "./SubmitButton.js";
 import {ButtonContext, btnInfo} from './button-context.js'
 import JustSubmitted from './JustSubmitted'
-
+import {Input, Textarea} from '../css/Styles.js'
 import * as submittersApi from '../api/submittersApi';
 
 function ContactForm() {
@@ -66,7 +65,7 @@ function ContactForm() {
     };
 
     if(!formIsValid(newData)) {
-      alert("oops you forgot something");
+      alert(`${errors}`);
     } else {
       setCount((C) => C + 1);
       const newArray = submittedArray.slice();
@@ -141,16 +140,14 @@ function ContactForm() {
       <form onSubmit={handleSubmit} id="app-form" key={count}>
         <label htmlFor="firstName">
           Your firstname:
-          <input
-            name="firstName"
+        <Input name="firstName"
             id="firstName"
             onChange={handleGreeting}
-            autoComplete="false"
-          />
+            autoComplete="false" />
         </label>
         <label htmlFor="lastName">
           Your lastname:
-          <input
+          <Input
             name="lastName"
             id="lastName"
             onChange={handleGreeting}
@@ -159,7 +156,7 @@ function ContactForm() {
         </label>
         <label htmlFor="desc">
           Describe yourself (optional):
-          <textarea ref={inputRef}></textarea>
+          <Textarea ref={inputRef}></Textarea>
         </label>
         <label>Form submitted {count} times</label>
         
