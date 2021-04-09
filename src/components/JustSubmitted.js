@@ -1,6 +1,5 @@
 import React, { useContext, useMemo}  from 'react'
 import { ConfigContext } from "./Checkbox.js"
-import styled, { css } from 'styled-components'
 import {FirstSubmitterFrame, Info, SubmitterFrame} from '../css/Styles.js'
 
 
@@ -36,7 +35,7 @@ function JustSubmitted(props) {
               result = <div className="profile" key={sub.id}> <h3>Last one to submit</h3>
                   {/* <div className="info"> */}
                       <Info>
-                    <div>{sub.firstName } {sub.lastName} 
+                    <div><div class="subFirstName">{sub.firstName}</div> {sub.lastName} 
                     <span> submitted {sub.time}</span>
                     .</div>
                     <div className="description"><span>Description:</span> {sub.desc}</div>
@@ -54,7 +53,7 @@ function submittersList(subsList){
         return subsList.map(sub=> (
          <div className="profile" key={sub.id}> 
             <Info>
-              <div> {sub.firstName } {sub.lastName} 
+              <div> <div class="subFirstName">{sub.firstName }</div> {sub.lastName} 
               <span> submitted {sub.time}</span>
               .</div>
               <div className="description"><span>Description: </span> {sub.desc}</div>
