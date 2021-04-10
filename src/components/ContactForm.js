@@ -1,14 +1,16 @@
-import React, { useState, useRef, useEffect, useCallback, useReducer } from "react";
+import React, { useState, useRef, useEffect, useCallback, useReducer, useContext } from "react";
 import Greeting from "./Greeting.js";
 import "../css/App.css";
 import SubmitButton from "./SubmitButton.js";
 import {ButtonContext, btnInfo} from './button-context.js'
 import JustSubmitted from './JustSubmitted'
-import {Input, Textarea} from '../css/Styles.js'
+import {Input, Textarea, FooterStyle, FooterInner} from '../css/Styles.js'
 import * as submittersApi from '../api/submittersApi';
+import { FooterContext } from "./shared/FooterContext.js";
 
 function ContactForm() {
 
+const footer = useContext(FooterContext);
 
   const initialState = {
     id: null,
@@ -33,9 +35,7 @@ function ContactForm() {
           case "setSubmittedArray": {
               return action.data;
           }
-          //add new actiontype to store submitters into json file
           case "addToJson": {
-              // return addtojsonfunc(action.data)
               return submittersApi.saveSubmitters(action.data);
           }
           default:
@@ -43,14 +43,9 @@ function ContactForm() {
       }
   }
   
-  //   const [submittedArray, setSubmittedArray] = useState([]);
+  
   const [submittedArray, dispatch] = useReducer(submittersReducer, []);
 
-  // function addtojsonfunc(data){
-  //   // console.log(`jsonfunc ${data.firstName} id ${data.id} `)
-  //   submittersApi.saveSubmitters(data);
-   
-  // };
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -114,7 +109,7 @@ function ContactForm() {
         setBtnState((btnState) => btnState = btnInfo.enabled);
     
       }
-  });
+  }, [inputName]);
 
 
   useEffect(() => {
@@ -167,6 +162,8 @@ function ContactForm() {
         </ButtonContext.Provider>
       </form>
       <JustSubmitted subs={submittedArray} />
+
+      <FooterStyle><FooterInner><h1>{footer.heading}</h1><a href={footer.link.url} className="footer-link" >{footer.link.title}</a></FooterInner></FooterStyle>
     </>
   );
 }

@@ -9,9 +9,6 @@ function SubmitCounts(props){
     const [initialSubmitters, seInitialSubmitters] = useState([props.submitters])
     const [showFromList, setShowFromList] = useState(false)
 
-    //  function handleSearchWhileType(event){
-    //     const result = event.target.value;
-    //   } //Maybe thois one later
   
       useEffect(() => {
         if (listToShow.length > 0){
@@ -64,13 +61,13 @@ function SubmitCounts(props){
             {
                 showFromList ?  listToShow.map(list => (
                     <div className="profile" key={list.id} id={list.id}>
-                        <SubmitterFrame>
+                        <SubmitterFrame key={list.id}>
                 <SearchResult result={list}/> 
                 </SubmitterFrame>
                 </div>
                 )) : 
                 initialSubmitters.map(mitter =>(
-                    <SubmitterFrame>
+                    <SubmitterFrame key={mitter.id}>
                      <div className="profile" key={mitter.id} id={mitter.id}>
                     <SearchResult result={mitter} /> 
                     </div> 

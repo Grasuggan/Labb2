@@ -27,20 +27,20 @@ it("should match Greet snapshot", () => {
     expect(greet).toMatchSnapshot();
 });
 
-// it("should render a submitter first name", () => {
-//     const fakesubmitters = [
+it("should render a submitter first name", () => {
+    const fakesubmitters =[ {
         
-//         {firstName: "Test",
-//         lastName: "Testsson",
-//         desc: "Some description of mr Testsson",
-//         time: "10.1.10" }
-//     ]
-//     act(() => {
-//         render(<JustSubmitted subs={fakesubmitters}/>, container);
-//     });
+        firstName: "Test",
+        lastName: "Testsson",
+        desc: "Some description of mr Testsson",
+        time: "10.1.10" ,
+    }]
+    act(() => {
+        render(<JustSubmitted subs={fakesubmitters}/>, container);
+    });
 
-//     expect(container.querySelector(".subFirstName").textContent).toBe(fakesubmitters.firstName);
-// });
+    expect(container.querySelector(".subFirstName").textContent).toBe("Test");
+});
 
 
 

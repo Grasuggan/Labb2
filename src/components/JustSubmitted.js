@@ -1,5 +1,4 @@
-import React, { useContext, useMemo}  from 'react'
-import { ConfigContext } from "./Checkbox.js"
+import React, { useMemo}  from 'react'
 import {FirstSubmitterFrame, Info, SubmitterFrame} from '../css/Styles.js'
 
 
@@ -7,7 +6,6 @@ import {FirstSubmitterFrame, Info, SubmitterFrame} from '../css/Styles.js'
 
 function JustSubmitted(props) {
  
-    const context = useContext(ConfigContext);
 
 
     let submitter = null;
@@ -32,10 +30,9 @@ function JustSubmitted(props) {
         subsList.map((sub, i) => {
             if(subLen === (i + 1)){
             
-              result = <div className="profile" key={sub.id}> <h3>Last one to submit</h3>
-                  {/* <div className="info"> */}
+             result = <div className="profile" key={sub.id}> <h3>Last one to submit</h3>
                       <Info>
-                    <div><div class="subFirstName">{sub.firstName}</div> {sub.lastName} 
+                    <div><div className="subFirstName">{sub.firstName}</div> {sub.lastName} 
                     <span> submitted {sub.time}</span>
                     .</div>
                     <div className="description"><span>Description:</span> {sub.desc}</div>
@@ -53,7 +50,7 @@ function submittersList(subsList){
         return subsList.map(sub=> (
          <div className="profile" key={sub.id}> 
             <Info>
-              <div> <div class="subFirstName">{sub.firstName }</div> {sub.lastName} 
+              <div> <div className="subFirstName">{sub.firstName }</div> {sub.lastName} 
               <span> submitted {sub.time}</span>
               .</div>
               <div className="description"><span>Description: </span> {sub.desc}</div>
@@ -69,7 +66,7 @@ function submittersList(subsList){
              {submitter} 
            </ FirstSubmitterFrame> : <div></div> } 
              
-             { context.showAll === true && submitter != null ? 
+             { submitter != null ? 
               <SubmitterFrame>
                   <h3>All submitters</h3>
             {allsubmitters} </SubmitterFrame>  : <div ></div>

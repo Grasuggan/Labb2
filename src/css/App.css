@@ -1,6 +1,9 @@
+body{
+  margin: 0;
+}
 .App {
     text-align: center;
-    width: 500px;
+    width: 100%;
     margin: 0 auto;
   }
   
@@ -41,7 +44,8 @@
   
   form{
     display: block;
-    width: 100%;
+    width: 500px;
+    margin: 0 auto
   }
   label{
     width: 95%;
@@ -74,4 +78,12 @@
  
    span{
     font-weight: normal;
+  }
+
+  a.footer-link{
+    color: #ffffff;
+    text-decoration: none;
+  }
+  a.footer-link:hover{
+    text-decoration: underline;
   }

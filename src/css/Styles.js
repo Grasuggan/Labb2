@@ -1,17 +1,19 @@
-import React from 'react'
 import styled from 'styled-components'
 
 const FirstSubmitterFrame = styled.div`
 display: block;
 padding: 5px;
-margin: 10px;
-background: #ff7d81;`
+margin: 10px auto;
+background: #ff7d81;
+width: 500px;`
+
 
 const SubmitterFrame = styled.div`
 display: block;
 padding: 5px;
-margin: 10px;
-background: #f9f9f9;`
+margin: 10px auto;
+background: #f9f9f9;
+width: 500px;`
 
 const Info = styled.div`
 padding: 20px;
@@ -39,4 +41,22 @@ const Checkboxstyled = styled.label`
 width: 50%;
 margin: 25px auto;` 
 
-export {FirstSubmitterFrame, SubmitterFrame, Info, Input, Textarea, Checkboxstyled}
+const FooterStyle = styled.footer`
+position: relative;
+font-size: 1rem;
+background-color: #444;
+display: block;
+width: 100%;
+height: 270px;
+margin-top: 40px;
+
+`
+const FooterInner = styled.div`
+color: #ffffff;
+display: block;
+position: relative;
+padding: 80px 0;
+
+`
+
+export {FirstSubmitterFrame, SubmitterFrame, Info, Input, Textarea, Checkboxstyled, FooterStyle, FooterInner}
