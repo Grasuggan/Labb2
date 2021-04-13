@@ -87,3 +87,10 @@ body{
   a.footer-link:hover{
     text-decoration: underline;
   }
+
+  .remove{
+    padding: 10px;
+    border: 1px solid grey;
+    background-color:#282c34;
+    color: white;
+  }

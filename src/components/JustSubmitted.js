@@ -30,7 +30,7 @@ function JustSubmitted(props) {
         subsList.map((sub, i) => {
             if(subLen === (i + 1)){
             
-             result = <div className="profile" key={sub.id}> <h3>Last one to submit</h3>
+             result = <div className="profile"> <h3>Last one to submit</h3>
                       <Info>
                     <div><div className="subFirstName">{sub.firstName}</div> {sub.lastName} 
                     <span> submitted {sub.time}</span>
@@ -48,7 +48,8 @@ function JustSubmitted(props) {
 function submittersList(subsList){
 
         return subsList.map(sub=> (
-         <div className="profile" key={sub.id}> 
+
+         <div className="profile" key={sub.firstName + sub.lastName}> 
             <Info>
               <div> <div className="subFirstName">{sub.firstName }</div> {sub.lastName} 
               <span> submitted {sub.time}</span>

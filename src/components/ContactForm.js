@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback, useReducer, useContext } from "react";
+import React, { useState, useRef, useEffect, useReducer, useContext } from "react";
 import Greeting from "./Greeting.js";
 import "../css/App.css";
 import SubmitButton from "./SubmitButton.js";
@@ -8,17 +8,20 @@ import {Input, Textarea, FooterStyle, FooterInner} from '../css/Styles.js'
 import * as submittersApi from '../api/submittersApi';
 import { FooterContext } from "./shared/FooterContext.js";
 
+
+const initialState = {
+  id: null,
+  firstName: "",
+  lastName: "",
+  desc: "",
+  time: "" 
+};
+
 function ContactForm() {
 
 const footer = useContext(FooterContext);
 
-  const initialState = {
-    id: null,
-    firstName: "",
-    lastName: "",
-    desc: "",
-    time: "" 
-  };
+  
 
   const [inputName, setInputName] = useState(initialState);
   const [count, setCount] = useState(0);
@@ -52,7 +55,6 @@ const footer = useContext(FooterContext);
     var today = new Date();
     var subTime = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const newData = {
-      // id: submittedArray.length + 8,
       firstName: event.target.firstName.value,
       lastName: event.target.lastName.value,
       desc: inputRef.current.value,
@@ -92,23 +94,39 @@ const footer = useContext(FooterContext);
     return Object.keys(_errors).length === 0;
   }
 
-  const handleGreeting = useCallback((event) => {
+  // const handleGreeting = useCallback((event) => {
   
-      const result = event.target.value;
-      setInputName({
-        ...inputName,
-        [event.target.name]: result,
-      });
+  //     const result = event.target.value;
+  //     setInputName({
+  //       ...inputName,
+  //       [event.target.name]: result,
+  //     });
 
    
+  // }, [inputName]);
+
+    function handleGreeting(event){
+  
+    const result = event.target.value;
+    setInputName({
+      ...inputName,
+      [event.target.name]: result,
+    });
+
+  
+    console.log(`handlegreeting ${inputName.firstName}, ${inputName.lastName} `)
+
+ 
+  };
+
+
+  useEffect(() => {
     if(inputName.firstName === "" || inputName.lastName === "" ){
-        setBtnState((btnState) => btnState = btnInfo.disabled);
+      setBtnState((btnState) => btnState = btnInfo.disabled);
     }
-    else{
-        
-        setBtnState((btnState) => btnState = btnInfo.enabled);
-    
-      }
+     else{
+      setBtnState((btnState) => btnState = btnInfo.enabled);
+    }
   }, [inputName]);
 
 
