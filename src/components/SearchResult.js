@@ -20,4 +20,4 @@ return(
 )
 }
 
-export default React.memo(SearchResult)
+export default SearchResult

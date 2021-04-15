@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useReducer, useContext } from "react";
+import React, { useState, useRef, useEffect, useReducer, useContext, useCallback } from "react";
 import Greeting from "./Greeting.js";
 import "../css/App.css";
 import SubmitButton from "./SubmitButton.js";
@@ -67,7 +67,6 @@ const footer = useContext(FooterContext);
       setCount((C) => C + 1);
       const newArray = submittedArray.slice();
       newArray.push(newData);
-    //   setSubmittedArray(newArray);
 
       dispatch({
         type: "addToJson",
@@ -94,30 +93,15 @@ const footer = useContext(FooterContext);
     return Object.keys(_errors).length === 0;
   }
 
-  // const handleGreeting = useCallback((event) => {
+  const handleGreeting = useCallback((event) => {
   
-  //     const result = event.target.value;
-  //     setInputName({
-  //       ...inputName,
-  //       [event.target.name]: result,
-  //     });
-
+      const result = event.target.value;
+      setInputName({
+        ...inputName,
+        [event.target.name]: result,
+      });
    
-  // }, [inputName]);
-
-    function handleGreeting(event){
-  
-    const result = event.target.value;
-    setInputName({
-      ...inputName,
-      [event.target.name]: result,
-    });
-
-  
-    console.log(`handlegreeting ${inputName.firstName}, ${inputName.lastName} `)
-
- 
-  };
+  }, [inputName]);
 
 
   useEffect(() => {

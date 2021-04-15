@@ -8,7 +8,15 @@ class SubmitButton extends React.Component{
   
 
     static contextType = ButtonContext;
- 
+    componentDidMount(){
+        console.log(`didmount ${this.context.color}`)
+    }
+    componentDidUpdate(){
+        console.log(`didupdate ${this.context.color}`)
+    }
+    componentWillUnmount(){
+        console.log(`willupdate ${this.context.color}`)
+    }
     
     render() {
         let btn = this.context;
@@ -21,5 +29,4 @@ class SubmitButton extends React.Component{
 }
 
 
-// export default React.memo(SubmitButton)
-export default SubmitButton
+ export default React.memo(SubmitButton)

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback} from 'react'
+import React, { useState, useEffect} from 'react'
 import SearchResult from './SearchResult'
 import {SubmitterFrame} from '../css/Styles.js'
 import {Input} from '../css/Styles.js'

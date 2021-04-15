@@ -24,7 +24,6 @@ function App() {
             
             <Navigation />
             
-            
             <Switch> 
             <FooterContext.Provider value={footer}>
                 <Route exact path="/" component={ContactForm} key={1}/>
