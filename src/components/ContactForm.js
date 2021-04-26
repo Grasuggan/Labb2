@@ -32,13 +32,12 @@ function ContactForm() {
   const [errors, setErrors] = useState({});
   const inputRef = useRef();
 
+  
+
   function submittersReducer(state, action) {
     switch (action.type) {
       case "setSubmittedArray": {
         return action.data;
-      }
-      case "addToJson": {
-        return submittersApi.saveSubmitters(action.data);
       }
       default:
         return state;
@@ -46,6 +45,7 @@ function ContactForm() {
   }
 
   const [submittedArray, dispatch] = useReducer(submittersReducer, []);
+
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -66,17 +66,15 @@ function ContactForm() {
       const newArray = submittedArray.slice();
       newArray.push(newData);
 
-      dispatch({
-        type: "addToJson",
-        data: newData,
-      });
+      submittersApi.saveSubmitters(newData);
+
       dispatch({
         type: "setSubmittedArray",
         data: newArray,
       });
     }
   }
-
+ 
   function formIsValid(newData) {
     const _errors = {};
 
